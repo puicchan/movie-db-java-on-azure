@@ -21,7 +21,6 @@ public class Movie implements Serializable {
     private Long id;
     private String name;
     private String description;
-    private Double rating;
     private String imageUri;
     private String imageFullPathUri;
     private String thumbnailFullPathUri;
@@ -78,24 +77,6 @@ public class Movie implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * Get movie rating.
-     *
-     * @return movie rating
-     */
-    public Double getRating() {
-        return rating;
-    }
-
-    /**
-     * Set movie rating.
-     *
-     * @param rating movie rating
-     */
-    public void setRating(Double rating) {
-        this.rating = rating;
     }
 
     /**
@@ -158,7 +139,6 @@ public class Movie implements Serializable {
         builder.append("id: ").append(id != null ? id : "").append(",");
         builder.append("name: ").append(name != null ? name : "").append(",");
         builder.append("description: ").append(description != null ? description : "").append(",");
-        builder.append("rating: ").append(rating != null ? rating : "").append(",");
         builder.append("imageFullPathUri: ").append(imageFullPathUri != null ? imageFullPathUri : "").append(",");
         builder.append("thumbnailFullPathUri: ").append(thumbnailFullPathUri != null ? thumbnailFullPathUri : "");
         builder.append("}");

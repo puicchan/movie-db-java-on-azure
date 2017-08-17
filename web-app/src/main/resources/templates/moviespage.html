@@ -26,7 +26,6 @@
                 <tr>
                     <th></th>
                     <th>Rank &#38; Title</th>
-                    <th>Rating</th>
                 </tr>
                 <tr th:each="movie : ${movies}">
                     <td th:if="${movie.thumbnailFullPathUri}">
@@ -39,7 +38,6 @@
                             src="../thumbnail.png"/></td>
                     <td><span><a th:text="${movie.id + '. '}"></a></span><span><a
                             th:href="@{'/movies/' + ${movie.id}}" th:text="${movie.name}"></a></span></td>
-                    <td th:text="${movie.rating}">Rating ...</td>
                 </tr>
             </table>
         </div>
