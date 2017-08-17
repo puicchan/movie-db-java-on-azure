@@ -1,0 +1,22 @@
+node('container') {
+  stage('init') {
+    // git clone
+    checkout scm
+  }
+
+  stage('build web-app') {
+    dir('web-app') {
+      sh 'mvn clean package'
+    }
+  }
+
+  stage('deploy web-app') {
+    dir('web-app/target') {
+      sh 'cp ../src/main/docker/base/Dockerfile .'
+      azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker',
+                         resourceGroup: env.WEB_APP_GROUP, appName: env.WEB_APP_NAME,
+                         dockerImageName: "$env.ACR_LOGIN_SERVER/web-app", dockerImageTag: "$env.BUILD_NUMBER",
+                         dockerRegistryEndpoint: [url: "http://$env.ACR_LOGIN_SERVER", credentialsId: env.ACR_CRED_ID]
+    }
+  }
+}
