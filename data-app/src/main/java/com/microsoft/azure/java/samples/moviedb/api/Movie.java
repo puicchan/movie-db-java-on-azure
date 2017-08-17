@@ -23,7 +23,6 @@ public class Movie {
     private Long id;
     private String name;
     private String description;
-    private Double rating;
     private String imageUri;
 
     /**
@@ -78,24 +77,6 @@ public class Movie {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * Get movie rating.
-     *
-     * @return movie rating
-     */
-    public Double getRating() {
-        return this.rating;
-    }
-
-    /**
-     * Set movie rating.
-     *
-     * @param rating movie rating
-     */
-    public void setRating(Double rating) {
-        this.rating = rating;
     }
 
     /**
