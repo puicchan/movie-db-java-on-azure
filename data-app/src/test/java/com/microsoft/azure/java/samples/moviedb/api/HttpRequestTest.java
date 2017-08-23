@@ -53,6 +53,23 @@ public class HttpRequestTest {
         assertThat(firstMovie.getId(), is(1L));
         assertThat(firstMovie.getName(), is("Inception (2010)"));
         assertThat(firstMovie.getDescription(), is("This is the description."));
+        assertThat(firstMovie.getRating(), is(9.7));
         assertNull(firstMovie.getImageUri());
+    }
+
+    @Test
+    public void patchMovieRating() throws Exception {
+        Movie movie = new Movie();
+        movie.setRating(0.0);
+        this.restTemplate.patchForObject(FIRST_MOVIE_PATH, new HttpEntity<>(movie), Void.class);
+
+        Movie patchedMovie = this.restTemplate.getForObject(FIRST_MOVIE_PATH, Movie.class);
+        assertThat(patchedMovie.getRating(), is(0.0));
+
+        movie.setRating(9.7);
+        this.restTemplate.patchForObject(FIRST_MOVIE_PATH, new HttpEntity<>(movie), Void.class);
+
+        Movie restoredMovie = this.restTemplate.getForObject(FIRST_MOVIE_PATH, Movie.class);
+        assertThat(restoredMovie.getRating(), is(9.7));
     }
 }
