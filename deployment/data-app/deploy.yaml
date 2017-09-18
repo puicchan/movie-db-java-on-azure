@@ -60,6 +60,7 @@ items:
                   port: ${DATA_APP_CONTAINER_PORT}
                 initialDelaySeconds: 60
                 timeoutSeconds: 5
+                imagePullPolicy: Always
           imagePullSecrets:
             - name: ${ACR_LOGIN_SERVER}
           securityContext:
