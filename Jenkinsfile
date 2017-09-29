@@ -21,7 +21,7 @@ node('container') {
       sh 'cp ../src/main/docker/base/Dockerfile .'
       azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker',
                          resourceGroup: env.WEB_APP_GROUP, appName: env.WEB_APP_NAME,
-                         dockerImageName: "$env.ACR_LOGIN_SERVER/web-app", dockerImageTag: "$(date %Y%m%d%H%M%S)-$env.BUILD_NUMBER",
+                         dockerImageName: "$env.ACR_LOGIN_SERVER/web-app", dockerImageTag: "$env.JOB_NAME-$env.BUILD_NUMBER",
                          dockerRegistryEndpoint: [url: "http://$env.ACR_LOGIN_SERVER", credentialsId: env.ACR_CRED_ID]
     }
   }
@@ -32,7 +32,7 @@ node('container') {
       withCredentials([usernamePassword(credentialsId: env.ACR_CRED_ID, usernameVariable: 'ACR_USER', passwordVariable: 'ACR_PASSWORD')]) {
         sh 'docker login -u $ACR_USER -p $ACR_PASSWORD http://$ACR_LOGIN_SERVER'
         // build image
-        def imageWithTag = "$env.ACR_LOGIN_SERVER/data-app:$(date %Y%m%d%H%M%S)-$env.BUILD_NUMBER"
+        def imageWithTag = "$env.ACR_LOGIN_SERVER/data-app:$env.JOB_NAME-$env.BUILD_NUMBER"
         def image = docker.build imageWithTag
         // push image
         image.push()
