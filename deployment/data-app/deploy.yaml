@@ -26,7 +26,7 @@ items:
         spec:
           containers:
             - name: "data-app"
-              image: "${ACR_LOGIN_SERVER}/data-app:${BUILD_NUMBER}"
+              image: "${ACR_LOGIN_SERVER}/data-app:${JOB_NAME}-${BUILD_NUMBER}"
               ports:
                 - containerPort: ${DATA_APP_CONTAINER_PORT}
               resources:
